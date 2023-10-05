@@ -1,0 +1,32 @@
+@media (max-width:768px) {
+    .principal_section {
+        height: 60vmin;
+    }
+
+    .mapa iframe {
+        width: 90%;
+        height: 14.0625rem;
+    }
+
+    .cuerpo {
+        width: 100vw;
+    }
+
+    footer {
+        width: 100vw;
+        height: 31.25rem;
+    }
+
+    .cards_footer_grid {
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-areas:
+            ".  col1   col2     ."
+            ".  col3    col4    ."
+        ;
+    }
+
+    .cards_footer_grid div article {
+        grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    }
+}

@@ -1,0 +1,21 @@
+@mixin tgrids {
+    display: grid;
+    grid-auto-rows: min-content;
+    grid-template-rows: repeat(auto-fill, minmax(15rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 2fr));
+    background-color: #F2EFE9;
+    background-size: contain;
+    justify-content: center;
+    gap: 1.25rem;
+    padding: 5% 10% 5% 10%;
+}
+
+@mixin lnavbar($lstyle, $align, $fsize, $direction, $gap, $rgap) {
+    display: flex;
+    list-style: $lstyle;
+    align-items: $align;
+    font-size: $fsize;
+    flex-direction: $direction;
+    gap: $gap;
+    row-gap: $rgap;
+}

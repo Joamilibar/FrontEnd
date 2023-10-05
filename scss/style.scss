@@ -1,0 +1,33 @@
+@import "./base/reset";
+@import "./base/typo";
+@import "./components/bootstrap";
+@import "./components/boton";
+@import "./utilities/variables";
+@import "./utilities/mixins";
+@import "./layout/header";
+@import "./layout/footer";
+
+
+
+/** PAGINA INDEX**/
+@import "./layout/main-index";
+
+/** PAGINA QUIENES SOMOS **/
+@import "./layout/quienes-somos";
+
+/** PAGINA TIENDA **/ 
+@import "./layout/main-tienda";
+
+/** PAGINA HOTELES**/
+@import "./layout/main-hoteles";
+
+/** PAGINA CONTACTO **/
+@import "./layout/main-contacto";
+
+
+/** MEDIA QUERY **/
+@import "./layout/media-q/media-1024px";
+@import "./layout/media-q/media-768px";
+@import "./layout/media-q/media-425px";
+@import "./layout/media-q/media-375px";
+@import "./layout/media-q/media-320px";

@@ -1,0 +1,21 @@
+/* Responsive 1024 (ANCHO) */
+
+@media (max-width:1024px) {
+    .principal_section {
+        height: 37.5rem;
+    }
+
+    .cards_footer_grid {
+        gap: 2% 1%;
+    }
+
+    .cards_footer_grid div {
+        padding: .9375rem;
+    }
+
+    .mapa iframe {
+        width: 90%;
+        height: 18.75rem;
+    }
+    
+}

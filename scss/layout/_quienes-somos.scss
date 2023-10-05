@@ -1,0 +1,53 @@
+/** PAGINA "QUIENES SOMOS"  **/
+
+.principal_section_quienes_somos {
+    display: flexbox;
+    width: 100%;
+    justify-items: center;
+}
+
+.titulo_quienes_somos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25rem;
+    margin-bottom: 5%;
+}
+
+.video_quienes_somos {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 30%;
+}
+
+.video_quienes_somos iframe {
+    align-items: center;
+    position: -ms-page;
+}
+
+.video_intro {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 3.125rem;
+    width: 80%;
+    height: 100%;
+    border: 0;
+}
+
+.descrip_quienes_somos {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+    padding: 6.25rem 6.25rem;
+
+}
+
+.descrip_quienes_somos p {
+    text-align: center;
+    font-size: 1.125rem;
+}

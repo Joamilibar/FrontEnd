@@ -1,0 +1,49 @@
+/* Mobile Responsive 320 (ANCHO) */
+
+@media (max-width:320px) {
+    .mapa iframe {
+        width: 90%;
+        height: 14.0625rem;
+    }
+
+    .principal_section {
+        height: 60vmin;
+    }
+
+    footer {
+        width: 100vw;
+        height: max-content;
+    }
+
+    .cards_footer_grid {
+        grid-template-rows: repeat(4, 1fr);
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-areas:
+            "col1"
+            "col2"
+            "col3"
+            "col4"
+        ;
+    }
+
+    .video_intro {
+        width: 18.75rem;
+    }
+
+    .main_section_hoteles{
+    }
+        .hoteles {
+    
+            article {
+                padding: .625rem 0rem;
+    
+                div {
+    
+                    img {
+                        width: 12.5rem;
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+}

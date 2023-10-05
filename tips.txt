@@ -1,0 +1,45 @@
+Buenas Maxi y Dami.
+
+Ya les depositamos los usd que pidieron tanto ustedes como los demas tutores.
+Adjunto la entrega FInal.
+
+GITHUB REPOSITORIO: LINK
+Github Pages: link
+Servidor: netlify o vercel
+FIGMA: 
+Presupuesto: (tecnologias, tiene que hablar metodologia de trabajo, precio)
+
+...................................
+
+CODIGO = 7
+1- solo sitio con 5 html (minimo) y 1 css
+
+1- Semantica
+2- identacion
+3- enlaces
+4- responsive (100%) TODOS LOS SITIOS (es el que mas pesa)
+5- SASS
+6- FRAMEWORK (OPCIONAL) 
+7- NO MAS LOREM (PAL LOBY)
+8- tiene que tener README. md 
+
+------------
+titulo del proyecto
+
+pequeño resumen de que trata
+
+profesores y tutores
+
+pongas las herramientas html css 
+
+una imagen
+---------------
+
+EL PROFESOR Y EL TUTOR TIENEN 20 - 30 DIAS PARA LA CORRECCION DEL PROYECTO. 
+
+Desde el 02/08/2023 20:30 h
+Hasta el 12/08/2023 23:59 h 
+
+COMMIT  TIENE QUE SER ENTREGA-FINAL ()
+
+TARIFARIO.ORG
