@@ -68,16 +68,18 @@ function addItemC(items, carrito, e) {
         if (itemAgregado) {
             itemAgregado.unidades++
             itemAgregado.subtotal = itemAgregado.unidades * itemAgregado.precioUnitario
-        } else {
+
+            } else {
             carrito.push({
                 id: itemBuscado.id,
                 nombre: itemBuscado.nombre,
                 precioUnitario: itemBuscado.precio,
                 unidades: 1,
-                subtotal: itemBuscado.precio
+                subtotal: itemBuscado.precio,
             })
         }
         itemBuscado.stock--
+
         // alert("Se agregó item al carrito")
     } else {
         alert("No hay más stock del item seleccionado")
@@ -92,20 +94,35 @@ function addItemC(items, carrito, e) {
 function renderCarrito(itemAgregado) {
     let carritoHtml = document.getElementById("carrito")
     carritoHtml.innerHTML = ""
-    carritoHtml.className = ""
-
+    carritoHtml.className = "ultimo_carrito container"
+    let encabItemCarrito = document.createElement("div")
+    encabItemCarrito.innerHTML = `
+        <div class="row">
+    
+        <div class="col-3"><span>Producto</span></div>
+        <div class="col-3"><span>Precio/Unit</span></div>
+        <div class="col-3"><span>Cantidad</span></div>
+        <div class="col-3"><span>Sub-Total</span></div>
+        </div>
+        `
+        carritoHtml.appendChild(encabItemCarrito)
+        
     for (const item of itemAgregado) {
         let listItemCarrito = document.createElement("div")
         listItemCarrito.innerHTML = `
-        <p class="text-center">${item.nombre}</p>
-        <p class="text-center">Precio Unitario: $.${item.precioUnitario}</p>
-        <p class="text-center">Cantidad: ${item.unidades}</p>
-        <p class="text-center">Sub-Total: $.${item.subtotal}</p>
+        <div class="row">        
+        
+        <div class="col-3"><p class="text-center col">${item.nombre}</p></div>
+        <div class="col-3"><p class="text-center col">$.${item.precioUnitario}</p></div>
+        <div class="col-3"><p class="text-center col">${item.unidades}</p></div>
+        <div class="col-3"><p class="text-center col">$.${item.subtotal}</p></div>
+        </div>
         `
+        
         carritoHtml.appendChild(listItemCarrito)
     }
-
 }
+
 
 function guardarCarrito(carrito) {
     let carritoJSON = JSON.stringify(carrito)
@@ -122,37 +139,7 @@ function recuperaCarrito(ultimoCarrito) {
     renderCarrito(carritoObjetoRecuperado)
 }
 
+
 function limpiarCarrito() {
     localStorage.removeItem("ultimoCarrito")
 }
-
-
-
-/* recuperaCarrito(recuperaCarrito) */
-
-/* 
-console.log(titulo_tienda)
-console.log(titulo_tienda.innerText)
-titulo_tienda.innerText = "Los Mejores Plumones, Almohadas, Featherbed, Sábanas y más..."
-console.log(titulo_tienda.innerHTML)
-
-let t_cards = document.getElementsByClassName("t_cards")
-console.log(t_cards)
-
-for (const card of t_cards) {
-    console.log(card)
-    
-}
-
-let nproductos = document.getElementsByTagName("h4")
-console.log(nproductos)
-for (const nproducto of nproductos) {
-    console.log(nproducto.innerText)
-} */
-
-// de JS a JSON stringify => string
-// de JSON a JS parse => tipo de saro original obj o arry
-
-let itemsJSON = JSON.stringify(items)
-localStorage.setItem("itemsJSON", itemsJSON)
-

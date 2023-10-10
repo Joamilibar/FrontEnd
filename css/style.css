@@ -446,6 +446,10 @@ footer {
   .mapa iframe {
     width: 90%; }
 
+/** PAGINA CARRITO **/
+.cuerpo_tienda {
+  justify-content: center; }
+
 /** MEDIA QUERY **/
 /* Responsive 1024 (ANCHO) */
 @media (max-width: 1024px) {
