@@ -387,10 +387,6 @@ footer {
   margin: 0rem;
   padding: 0rem; }
 
-#carrito {
-  width: 40%;
-  @background-principal; }
-
 /** PAGINA HOTELES**/
 .main_section_hoteles {
   display: flex;
@@ -449,6 +445,16 @@ footer {
 /** PAGINA CARRITO **/
 .cuerpo_tienda {
   justify-content: center; }
+
+.carritoTienda {
+  max-width: 18.75rem;
+  border-style: ridge;
+  font-size: small;
+  @background-principal; }
+
+.titulosCarrito {
+  justify-content: center;
+  font-weight: bold; }
 
 /** MEDIA QUERY **/
 /* Responsive 1024 (ANCHO) */

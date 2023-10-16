@@ -2,3 +2,14 @@
     justify-content: center;
 }
 
+.carritoTienda {
+    max-width: 18.75rem;
+    border-style: ridge ;
+    font-size: small;
+    @background-principal
+}
+
+.titulosCarrito {
+    justify-content: center;
+    font-weight: bold;
+}

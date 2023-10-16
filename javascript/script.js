@@ -14,7 +14,6 @@ let items = [
 
 
 let carrito = []
-
 renderCardsItem(items, carrito)
 
 
@@ -31,6 +30,8 @@ function filtRender(items) {
     renderCardsItem(itemsFiltrados)
     console.log(itemsFiltrados)
 }
+
+const formatoNumero = (number) => new Intl.NumberFormat("ch-CL").format(number)
 
 function renderCardsItem(items, carrito) {
     let prod_tienda = document.getElementById("CProductos")
@@ -60,67 +61,86 @@ function renderCardsItem(items, carrito) {
 
 
 
-function addItemC(items, carrito, e) {
-    let itemBuscado = items.find(item => item.id === Number(e.target.id))
-    let itemAgregado = carrito.find(item => item.id === itemBuscado.id)
-
-    if (itemBuscado.stock > 0) {
-        if (itemAgregado) {
-            itemAgregado.unidades++
-            itemAgregado.subtotal = itemAgregado.unidades * itemAgregado.precioUnitario
-
-            } else {
-            carrito.push({
-                id: itemBuscado.id,
-                nombre: itemBuscado.nombre,
-                precioUnitario: itemBuscado.precio,
-                unidades: 1,
-                subtotal: itemBuscado.precio,
-            })
-        }
-        itemBuscado.stock--
-
-        // alert("Se agregó item al carrito")
-    } else {
-        alert("No hay más stock del item seleccionado")
-    }
-    renderCarrito(carrito)
-    guardarCarrito(carrito)
-
-}
 
 
 
 function renderCarrito(itemAgregado) {
     let carritoHtml = document.getElementById("carrito")
     carritoHtml.innerHTML = ""
-    carritoHtml.className = "ultimo_carrito container"
+    carritoHtml.className = "ultimo_carrito carritoTienda container"
+    let = sumPrecios = 0
     let encabItemCarrito = document.createElement("div")
     encabItemCarrito.innerHTML = `
-        <div class="row">
-    
+        <div class="titulosCarrito row">
+        
         <div class="col-3"><span>Producto</span></div>
         <div class="col-3"><span>Precio/Unit</span></div>
         <div class="col-3"><span>Cantidad</span></div>
         <div class="col-3"><span>Sub-Total</span></div>
         </div>
         `
-        carritoHtml.appendChild(encabItemCarrito)
-        
+    carritoHtml.appendChild(encabItemCarrito)
+
     for (const item of itemAgregado) {
         let listItemCarrito = document.createElement("div")
         listItemCarrito.innerHTML = `
         <div class="row">        
         
         <div class="col-3"><p class="text-center col">${item.nombre}</p></div>
-        <div class="col-3"><p class="text-center col">$.${item.precioUnitario}</p></div>
+        <div class="col-3"><p class="text-center col">$.${formatoNumero(item.precioUnitario)}</p></div>
         <div class="col-3"><p class="text-center col">${item.unidades}</p></div>
-        <div class="col-3"><p class="text-center col">$.${item.subtotal}</p></div>
+        <div class="col-3"><p class="text-center col">$.${formatoNumero(item.subTotal)}</p></div>
         </div>
         `
         
         carritoHtml.appendChild(listItemCarrito)
+        /*         let btnAgregarCarrito = document.getElementById(item.id)
+        btnAgregarCarrito.addEventListener("click", (e ) => addItemC(items, carrito, e))
+        */
     }
+}
+
+
+function addItemC(items, carrito, e) {
+    let itemBuscado = items.find(item => item.id === Number(e.target.id))
+    let itemAgregado = carrito.find(item => item.id === itemBuscado.id)
+    
+    if (itemBuscado.stock > 0) {
+        if (itemAgregado) {
+            itemAgregado.unidades++
+            itemAgregado.subTotal = itemAgregado.unidades * itemAgregado.precioUnitario
+            
+        } else {
+            carrito.push({
+                id: itemBuscado.id,
+                nombre: itemBuscado.nombre,
+                precioUnitario: itemBuscado.precio,
+                unidades: 1,
+                subTotal: itemBuscado.precio,
+            })
+        }
+        itemBuscado.stock--
+        
+        // alert("Se agregó item al carrito")
+    } else {
+        alert("No hay más stock del item seleccionado")
+    }
+    renderCarrito(carrito)
+    guardarCarrito(carrito)
+    total(carrito)
+}
+
+
+
+let total = (carrito) => {
+    sumPrecios = 0
+    for (let i = 0; i < carrito.length; i++) {
+        console.log(carrito[i].nombre, carrito[i].subTotal)
+        sumPrecios = sumPrecios + Number(carrito[i].subTotal);
+        console.log(sumPrecios)
+        
+    }
+    return sumPrecios;
 }
 
 
