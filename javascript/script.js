@@ -17,6 +17,7 @@ let carrito = []
 renderCardsItem(items, carrito)
 
 
+
 let buscarHtml = document.getElementById("buscarItem")
 console.log(buscarHtml)
 
@@ -64,11 +65,11 @@ function renderCardsItem(items, carrito) {
 
 
 
-function renderCarrito(itemAgregado) {
+function renderCarrito(itemAgregado, total) {
+    
     let carritoHtml = document.getElementById("carrito")
     carritoHtml.innerHTML = ""
     carritoHtml.className = "ultimo_carrito carritoTienda container"
-    let = sumPrecios = 0
     let encabItemCarrito = document.createElement("div")
     encabItemCarrito.innerHTML = `
         <div class="titulosCarrito row">
@@ -82,6 +83,7 @@ function renderCarrito(itemAgregado) {
     carritoHtml.appendChild(encabItemCarrito)
 
     for (const item of itemAgregado) {
+        
         let listItemCarrito = document.createElement("div")
         listItemCarrito.innerHTML = `
         <div class="row">        
@@ -92,55 +94,69 @@ function renderCarrito(itemAgregado) {
         <div class="col-3"><p class="text-center col">$.${formatoNumero(item.subTotal)}</p></div>
         </div>
         `
-        
+
         carritoHtml.appendChild(listItemCarrito)
         /*         let btnAgregarCarrito = document.getElementById(item.id)
         btnAgregarCarrito.addEventListener("click", (e ) => addItemC(items, carrito, e))
         */
     }
+    
+    let tituloTotal = document.createElement("div")
+    tituloTotal.innerHTML = `
+        <div class="titulosCarrito row">
+            <div class="col-3"><p>Total</p></div>
+            <div class="col-3"><p class="text-center col">$.${formatoNumero(totalCarrito)}</p></div>
+        </div>
+    `
+    console.log(totalCarrito)
+    carritoHtml.appendChild(tituloTotal) 
+    
 }
 
 
-function addItemC(items, carrito, e) {
+function addItemC(items, carrito, e, sumPrecios) {
     let itemBuscado = items.find(item => item.id === Number(e.target.id))
     let itemAgregado = carrito.find(item => item.id === itemBuscado.id)
     
+
     if (itemBuscado.stock > 0) {
         if (itemAgregado) {
             itemAgregado.unidades++
             itemAgregado.subTotal = itemAgregado.unidades * itemAgregado.precioUnitario
-            
+            totalCarrito = sumPrecios
         } else {
             carrito.push({
                 id: itemBuscado.id,
                 nombre: itemBuscado.nombre,
                 precioUnitario: itemBuscado.precio,
                 unidades: 1,
-                subTotal: itemBuscado.precio,
+                subTotal: itemBuscado.precio,                
             })
         }
         itemBuscado.stock--
-        
+
         // alert("Se agregó item al carrito")
     } else {
         alert("No hay más stock del item seleccionado")
     }
+    total(carrito)
     renderCarrito(carrito)
     guardarCarrito(carrito)
-    total(carrito)
+    console.log(carrito)
 }
 
 
 
-let total = (carrito) => {
+function total (carrito) {
+    totalCarrito = 0
     sumPrecios = 0
     for (let i = 0; i < carrito.length; i++) {
         console.log(carrito[i].nombre, carrito[i].subTotal)
         sumPrecios = sumPrecios + Number(carrito[i].subTotal);
-        console.log(sumPrecios)
         
     }
-    return sumPrecios;
+    totalCarrito = sumPrecios
+    
 }
 
 
