@@ -3,12 +3,13 @@ fetch("../javascript/info.json")
     .then(items => principal(items))
 
 
-function principal(items, carrito) {
+function principal(items) {
     renderCardsItem(items, carrito)
     renderCardsItem(items)
+
     let buscarHtml = document.getElementById("buscarItem")
     console.log(buscarHtml)
-    
+
     let btnBuscarHtml = document.getElementById("btnBuscar")
     btnBuscarHtml.addEventListener("click", () => filtRender(items))
 
@@ -44,21 +45,18 @@ function renderCardsItem(items, carrito) {
     </div>
     `
 
-    prod_tienda.appendChild(tarjeta)
-    
-    let btnAdd = document.getElementById(item.id)
-    btnAdd.addEventListener("click", (e) => addItemC(items, carrito, e))
-})
+        prod_tienda.appendChild(tarjeta)
+
+        let btnAdd = document.getElementById(item.id)
+        btnAdd.addEventListener("click", (e) => addItemC(items, carrito, e))
+    })
 }
 
 
 
-
-
 function addItemC(items, carrito, e, sumPrecios) {
-        let itemBuscado = items.find(item => item.id === Number(e.target.id))
-        let itemAgregado = carrito.find(item => item.id === itemBuscado.id)
-
+    let itemBuscado = items.find(item => item.id === Number(e.target.id))
+    let itemAgregado = carrito.find(item => item.id === itemBuscado.id)
 
     if (itemBuscado.stock > 0) {
         if (itemAgregado) {
@@ -75,27 +73,23 @@ function addItemC(items, carrito, e, sumPrecios) {
             })
         }
         itemBuscado.stock--
-        
-        guardarCarrito(itemAgregado)
-
+        /* localStorage.setItem("carrito", JSON.stringify(carrito)) */
+        guardarCarrito(carrito)
 
     } else {
-
         ventanaAlerta('top-end', 'info', itemBuscado.nombre, 'No hay más stock disponible!', 'true', 'false', 'false', "300px", "250px")
     }
     total(carrito)
     renderCarrito(carrito)
-    console.log(carrito)
 }
 
 function renderCarrito(itemAgregado) {
-
     let carritoHtml = document.getElementById("carrito")
     carritoHtml.innerHTML = ""
     carritoHtml.className = "ultimo_carrito carritoTienda container"
-    
+
     if (carritoHtml) {
-        
+
         let encabItemCarrito = document.createElement("div")
         encabItemCarrito.innerHTML = `
         <div class="titulosCarrito row">
@@ -107,9 +101,9 @@ function renderCarrito(itemAgregado) {
         </div>
         `
         carritoHtml.appendChild(encabItemCarrito)
-        
+
         for (const item of itemAgregado) {
-            
+
             let listItemCarrito = document.createElement("div")
             listItemCarrito.innerHTML = `
             <div class="row">        
@@ -120,11 +114,11 @@ function renderCarrito(itemAgregado) {
             <div class="col-3"><p class="text-center col">$.${formatoNumero(item.subTotal)}</p></div>
             </div>
             `
-            
+
             carritoHtml.appendChild(listItemCarrito)
-            
+
         }
-        
+
         let tituloTotal = document.createElement("div")
         tituloTotal.innerHTML = `
         <div class="titulosCarrito row">
@@ -134,7 +128,7 @@ function renderCarrito(itemAgregado) {
         `
         console.log(totalCarrito)
         carritoHtml.appendChild(tituloTotal)
-        
+
         let btnFinCompra = document.createElement("button")
         btnFinCompra.innerHTML = `
         <div class="row">
@@ -144,28 +138,29 @@ function renderCarrito(itemAgregado) {
         btnFinCompra.addEventListener("click", (carrito) => finCompra(carrito))
         carritoHtml.appendChild(btnFinCompra)
     }
-        
-    }
-    
- 
-    
-    function finCompra(carrito) {  
-        carrito = document.getElementById("carrito")
-        carrito.innerHTML = ""
-        carrito.className = ""
-        sessionStorage.clear(carrito)
-        localStorage.clear(carrito)
-        /* 
-        ventanaAlerta('center', 'success', 'Compra realizada con éxito', 'Gracias por su Compra.!', 'true', 'true', 'Seguir Comprando', '350px', '300px')
-        */
-    }
-    
-        
-    function ventanaAlerta(position, icon, title, text, showConfirmButton, showDenyButton, denyButtonText, width, height) {
-        Swal.fire({
-            position,
-            icon,
-            title,
+
+}
+
+
+function finCompra(carrito) {
+    carrito = document.getElementById("carrito")
+    carrito.innerHTML = ""
+    carrito.className = ""
+    carrito = "";
+    localStorage.removeItem("carrito")
+    let SCarrito = sessionStorage.key(carrito)
+    sessionStorage.clear("SCarrito")
+
+    ventanaAlerta('center', 'success', 'Compra realizada con éxito', 'Gracias por su Compra.!', 'true', 'true', 'Seguir Comprando', '350px', '300px')
+
+}
+
+
+function ventanaAlerta(position, icon, title, text, showConfirmButton, showDenyButton, denyButtonText, width, height) {
+    Swal.fire({
+        position,
+        icon,
+        title,
         text,
         showConfirmButton,
         showDenyButton,
@@ -194,24 +189,24 @@ function total(carrito) {
 
 
 function guardarCarrito(carrito) {
-    let carritoJSON = JSON.stringify(carrito)
-    localStorage.setItem("ultimoCarrito", carritoJSON)
+    localStorage.setItem("carrito", JSON.stringify(carrito))
 }
 
-function recuperaCarrito(ultimoCarrito) {
-    /* ultimoCarrito = localStorage.key("ultimoCarrito") */
-    let carritoRecuperado = localStorage.getItem("ultimoCarrito")
+/* 
+function recuperaCarrito() {
+    /* carrito = localStorage.key("carrito")
+    let carritoRecuperado = localStorage.getItem("carrito")
     let carritoObjetoRecuperado = JSON.parse(carritoRecuperado)
     console.log(carritoRecuperado)
     console.log(carritoObjetoRecuperado)
 
     renderCarrito(carritoObjetoRecuperado)
 }
+ */
 
-
-function limpiarCarrito(ultimoCarrito) {
-    localStorage.removeItem(ultimoCarrito)
-    sessionStorage.clear(ultimoCarrito)
+function limpiarCarrito(carrito) {
+    localStorage.removeItem(carrito)
+    sessionStorage.clear(carrito)
 }
 
 
