@@ -1,32 +1,22 @@
-
-let items = [
-    { id: 1, nombre: "Featherbed Duvet", descripcion: "Mezcla de duvet y pluma de cuerpo para oponer resistencia el peso del cuerpo.", imagen: "featherbed.png", stock: 5, precio: 600000 },
-    { id: 2, nombre: "Almohada Duvet", descripcion: "Permite un soporte ideal sin perder suavidad.", imagen: "almohadas.png", stock: 30, precio: 180000 },
-    { id: 3, nombre: "Bata Luxury", descripcion: "Una bata ideal para un momento de relax.", imagen: "bata_luxury.png", stock: 25, precio: 60000 },
-    { id: 4, nombre: "Juego Sábanas Crucero", descripcion: "100% Algodón de fibra extra larga de 500 hilos.", imagen: "sabana_crucero.png", stock: 10, precio: 220000 },
-    { id: 5, nombre: "Juego Piecera Lino", descripcion: "Funda Piecera 120*220 + 2 Fundas de Cojín 50*70.", imagen: "piecera_lino.png", stock: 12, precio: 199000 },
-    { id: 6, nombre: "Plumón Classic", descripcion: "100% Algodón 420 Hilos Downproof. 100% Duvet Ganso 750 FP.", imagen: "plumon_classic.png", stock: 10, precio: 780000 },
-    { id: 7, nombre: "Plumón Premium", descripcion: "100% Algodón Premium Ultra light Downproof. 100% Duvet Ganso 850 FP.", imagen: "plumon_premium.png", stock: 17, precio: 1100000 },
-    { id: 8, nombre: "Juego Sábana Doble Alforza", descripcion: "Juego Sábana Doble Alforza", imagen: "sabana_doblealforza.png", stock: 12, precio: 220000 },
-
-]
+fetch("../javascript/info.json")
+    .then(respuesta => respuesta.json())
+    .then(items => principal(items))
 
 
+function principal(items, carrito) {
+    renderCardsItem(items, carrito)
+    renderCardsItem(items)
+    let buscarHtml = document.getElementById("buscarItem")
+    console.log(buscarHtml)
+    
+    let btnBuscarHtml = document.getElementById("btnBuscar")
+    btnBuscarHtml.addEventListener("click", () => filtRender(items))
 
-let carrito = []
-renderCardsItem(items, carrito)
+}
 
 
-
-let buscarHtml = document.getElementById("buscarItem")
-console.log(buscarHtml)
-
-let btnBuscarHtml = document.getElementById("btnBuscar")
-btnBuscarHtml.addEventListener("click", () => filtRender(items))
 
 function filtRender(items) {
-
-
     let itemsFiltrados = items.filter(item => item.nombre.toUpperCase().includes(buscarItem.value.toUpperCase()))
     renderCardsItem(itemsFiltrados)
     console.log(itemsFiltrados)
@@ -35,6 +25,7 @@ function filtRender(items) {
 const formatoNumero = (number) => new Intl.NumberFormat("ch-CL").format(number)
 
 function renderCardsItem(items, carrito) {
+    carrito = []
     let prod_tienda = document.getElementById("CProductos")
     CProductos.className = "tienda_prod container"
     prod_tienda.innerHTML = ""
@@ -53,71 +44,21 @@ function renderCardsItem(items, carrito) {
     </div>
     `
 
-        prod_tienda.appendChild(tarjeta)
-
-        let btnAdd = document.getElementById(item.id)
-        btnAdd.addEventListener("click", (e) => addItemC(items, carrito, e))
-    })
+    prod_tienda.appendChild(tarjeta)
+    
+    let btnAdd = document.getElementById(item.id)
+    btnAdd.addEventListener("click", (e) => addItemC(items, carrito, e))
+})
 }
 
 
 
-
-
-
-function renderCarrito(itemAgregado, total) {
-    
-    let carritoHtml = document.getElementById("carrito")
-    carritoHtml.innerHTML = ""
-    carritoHtml.className = "ultimo_carrito carritoTienda container"
-    let encabItemCarrito = document.createElement("div")
-    encabItemCarrito.innerHTML = `
-        <div class="titulosCarrito row">
-        
-        <div class="col-3"><span>Producto</span></div>
-        <div class="col-3"><span>Precio/Unit</span></div>
-        <div class="col-3"><span>Cantidad</span></div>
-        <div class="col-3"><span>Sub-Total</span></div>
-        </div>
-        `
-    carritoHtml.appendChild(encabItemCarrito)
-
-    for (const item of itemAgregado) {
-        
-        let listItemCarrito = document.createElement("div")
-        listItemCarrito.innerHTML = `
-        <div class="row">        
-        
-        <div class="col-3"><p class="text-center col">${item.nombre}</p></div>
-        <div class="col-3"><p class="text-center col">$.${formatoNumero(item.precioUnitario)}</p></div>
-        <div class="col-3"><p class="text-center col">${item.unidades}</p></div>
-        <div class="col-3"><p class="text-center col">$.${formatoNumero(item.subTotal)}</p></div>
-        </div>
-        `
-
-        carritoHtml.appendChild(listItemCarrito)
-        /*         let btnAgregarCarrito = document.getElementById(item.id)
-        btnAgregarCarrito.addEventListener("click", (e ) => addItemC(items, carrito, e))
-        */
-    }
-    
-    let tituloTotal = document.createElement("div")
-    tituloTotal.innerHTML = `
-        <div class="titulosCarrito row">
-            <div class="col-3"><p>Total</p></div>
-            <div class="col-3"><p class="text-center col">$.${formatoNumero(totalCarrito)}</p></div>
-        </div>
-    `
-    console.log(totalCarrito)
-    carritoHtml.appendChild(tituloTotal) 
-    
-}
 
 
 function addItemC(items, carrito, e, sumPrecios) {
-    let itemBuscado = items.find(item => item.id === Number(e.target.id))
-    let itemAgregado = carrito.find(item => item.id === itemBuscado.id)
-    
+        let itemBuscado = items.find(item => item.id === Number(e.target.id))
+        let itemAgregado = carrito.find(item => item.id === itemBuscado.id)
+
 
     if (itemBuscado.stock > 0) {
         if (itemAgregado) {
@@ -130,33 +71,125 @@ function addItemC(items, carrito, e, sumPrecios) {
                 nombre: itemBuscado.nombre,
                 precioUnitario: itemBuscado.precio,
                 unidades: 1,
-                subTotal: itemBuscado.precio,                
+                subTotal: itemBuscado.precio,
             })
         }
         itemBuscado.stock--
+        
+        guardarCarrito(itemAgregado)
 
-        // alert("Se agregó item al carrito")
+
     } else {
-        alert("No hay más stock del item seleccionado")
+
+        ventanaAlerta('top-end', 'info', itemBuscado.nombre, 'No hay más stock disponible!', 'true', 'false', 'false', "300px", "250px")
     }
     total(carrito)
     renderCarrito(carrito)
-    guardarCarrito(carrito)
     console.log(carrito)
 }
 
+function renderCarrito(itemAgregado) {
 
+    let carritoHtml = document.getElementById("carrito")
+    carritoHtml.innerHTML = ""
+    carritoHtml.className = "ultimo_carrito carritoTienda container"
+    
+    if (carritoHtml) {
+        
+        let encabItemCarrito = document.createElement("div")
+        encabItemCarrito.innerHTML = `
+        <div class="titulosCarrito row">
+        
+        <div class="col-3"><span>Producto</span></div>
+        <div class="col-3"><span>Precio/Unit</span></div>
+        <div class="col-3"><span>Cantidad</span></div>
+        <div class="col-3"><span>Sub-Total</span></div>
+        </div>
+        `
+        carritoHtml.appendChild(encabItemCarrito)
+        
+        for (const item of itemAgregado) {
+            
+            let listItemCarrito = document.createElement("div")
+            listItemCarrito.innerHTML = `
+            <div class="row">        
+        
+            <div class="col-3"><p class="text-center col">${item.nombre}</p></div>
+            <div class="col-3"><p class="text-center col">$.${formatoNumero(item.precioUnitario)}</p></div>
+            <div class="col-3"><p class="text-center col">${item.unidades}</p></div>
+            <div class="col-3"><p class="text-center col">$.${formatoNumero(item.subTotal)}</p></div>
+            </div>
+            `
+            
+            carritoHtml.appendChild(listItemCarrito)
+            
+        }
+        
+        let tituloTotal = document.createElement("div")
+        tituloTotal.innerHTML = `
+        <div class="titulosCarrito row">
+        <div class="col-3"><p>Total</p></div>
+        <div class="col-3"><p class="text-center col">$.${formatoNumero(totalCarrito)}</p></div>
+        </div>
+        `
+        console.log(totalCarrito)
+        carritoHtml.appendChild(tituloTotal)
+        
+        let btnFinCompra = document.createElement("button")
+        btnFinCompra.innerHTML = `
+        <div class="row">
+            <button type="submit" class="btn">Finalizar Compra</button>
+        </div>
+        `
+        btnFinCompra.addEventListener("click", (carrito) => finCompra(carrito))
+        carritoHtml.appendChild(btnFinCompra)
+    }
+        
+    }
+    
+ 
+    
+    function finCompra(carrito) {  
+        carrito = document.getElementById("carrito")
+        carrito.innerHTML = ""
+        carrito.className = ""
+        sessionStorage.clear(carrito)
+        localStorage.clear(carrito)
+        /* 
+        ventanaAlerta('center', 'success', 'Compra realizada con éxito', 'Gracias por su Compra.!', 'true', 'true', 'Seguir Comprando', '350px', '300px')
+        */
+    }
+    
+        
+    function ventanaAlerta(position, icon, title, text, showConfirmButton, showDenyButton, denyButtonText, width, height) {
+        Swal.fire({
+            position,
+            icon,
+            title,
+        text,
+        showConfirmButton,
+        showDenyButton,
+        denyButtonText,
+        width,
+        height,
+    }).then((result, Carrito) => {
+        if (result.isConfirmed) {
+            limpiarCarrito()
+        }
+    })
 
-function total (carrito) {
+}
+
+function total(carrito) {
     totalCarrito = 0
     sumPrecios = 0
     for (let i = 0; i < carrito.length; i++) {
         console.log(carrito[i].nombre, carrito[i].subTotal)
         sumPrecios = sumPrecios + Number(carrito[i].subTotal);
-        
+
     }
     totalCarrito = sumPrecios
-    
+
 }
 
 
@@ -176,6 +209,9 @@ function recuperaCarrito(ultimoCarrito) {
 }
 
 
-function limpiarCarrito() {
-    localStorage.removeItem("ultimoCarrito")
+function limpiarCarrito(ultimoCarrito) {
+    localStorage.removeItem(ultimoCarrito)
+    sessionStorage.clear(ultimoCarrito)
 }
+
+

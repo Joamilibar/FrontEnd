@@ -1,0 +1,66 @@
+[
+    {
+        "id": 1,
+        "nombre": "Featherbed Duvet",
+        "descripcion": "Mezcla de duvet y pluma de cuerpo para oponer resistencia el peso del cuerpo.",
+        "imagen": "featherbed.png",
+        "stock": 5,
+        "precio": 600000
+    },
+    {
+        "id": 2,
+        "nombre": "Almohada Duvet",
+        "descripcion": "Permite un soporte ideal sin perder suavidad.",
+        "imagen": "almohadas.png",
+        "stock": 30,
+        "precio": 180000
+    },
+    {
+        "id": 3,
+        "nombre": "Bata Luxury",
+        "descripcion": "Una bata ideal para un momento de relax.",
+        "imagen": "bata_luxury.png",
+        "stock": 25,
+        "precio": 60000
+    },
+    {
+        "id": 4,
+        "nombre": "Juego Sábanas Crucero",
+        "descripcion": "100% Algodón de fibra extra larga de 500 hilos.",
+        "imagen": "sabana_crucero.png",
+        "stock": 10,
+        "precio": 220000
+    },
+    {
+        "id": 5,
+        "nombre": "Juego Piecera Lino",
+        "descripcion": "Funda Piecera 120*220 + 2 Fundas de Cojín 50*70.",
+        "imagen": "piecera_lino.png",
+        "stock": 12,
+        "precio": 199000
+    },
+    {
+        "id": 6,
+        "nombre": "Plumón Classic",
+        "descripcion": "100% Algodón 420 Hilos Downproof. 100% Duvet Ganso 750 FP.",
+        "imagen": "plumon_classic.png",
+        "stock": 10,
+        "precio": 780000
+    },
+    {
+        "id": 7,
+        "nombre": "Plumón Premium",
+        "descripcion": "100% Algodón Premium Ultra light Downproof. 100% Duvet Ganso 850 FP.",
+        "imagen": "plumon_premium.png",
+        "stock": 17,
+        "precio": 1100000
+    },
+    {
+        "id": 8,
+        "nombre": "Juego Sábana Doble Alforza",
+        "descripcion": "Juego Sábana Doble Alforza",
+        "imagen": "sabana_doblealforza.png",
+        "stock": 12,
+        "precio": 220000
+    }
+]
