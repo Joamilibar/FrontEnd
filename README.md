@@ -6,7 +6,7 @@
 ## Introducción
 
 <p>
-Sitio web para una empresa importadora y fabricante de ropa de cama de lijo, motivado crear una página web personalizable, y en el uso de las herramientas y tecnologías aprendidas a lo largo de las clases del curso de Desarrollo Web de Coder House, cumpliendo con los requisitos para el proyecto final.
+Sitio web para una empresa importadora y fabricante de ropa de cama de lujo, motivado crear una página web personalizable, y en el uso de las herramientas y tecnologías aprendidas a lo largo de las clases del curso de Desarrollo Web de Coder House, cumpliendo con los requisitos para el proyecto final.
 
 La nercesidad de crear un sitio web de ropa de cama para mostrar los productos de alta calidad creados por Beds & Dreams, y poder ofrecerlos de venta en la tienda, y a futuro en la página llegando así a más personas e incrementando así el alcance de compradores, ventas, con una presencia formal en internet.
 
